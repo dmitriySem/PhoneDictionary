@@ -1,17 +1,17 @@
 def input_surname():
-    return input('Введите фамилию контакта: ')
+    return input('Введите фамилию контакта: ').title()
 
 def input_name():
-    return input('Введите имя контакта: ')
+    return input('Введите имя контакта: ').title()
 
 def input_patronymic():
-    return input('Введите отчество контакта: ')
+    return input('Введите отчество контакта: ').title()
 
 def input_phone():
-    return input('Введите телефон контакта: ')
+    return input('Введите телефон контакта: ').title()
 
 def input_adress():
-    return input('Введите адрес(город) контакта: ')
+    return input('Введите адрес(город) контакта: ').title()
 def create_contact():
     surname = input_surname()
     name = input_name()
@@ -28,12 +28,36 @@ def add_contact():
 
 
 def print_contact():
-    pass
+    with open('phonebook.txt', 'r', encoding='utf-8') as file:
+        print(''.join(['{} {}'.format(number, letter) for number, letter in enumerate(file.read().rstrip().replace(':', '').split('\n\n'), 1)]))
+        # print(file.read())
    
         
 
 def search_contact():
-    pass
+    print(
+            'Возможные варианты поиска: \n'
+            '1. По Фамилии \n'
+            '2. По имени \n'
+            '3. По отчеству \n'
+            '4. По телефону \n'
+            '5. По адресу(город)'
+            )
+    var = input('Выберите вариант действий: ')
+    while var not in ('1', '2', '3', '4', '5'):
+        print('Некоректный ввод!')
+        var = input('Выберите вариант действий: ')
+    i_var = int(var) - 1 
+
+    search = input('Введите данные для поиска: ')
+    with open('phonebook.txt', 'r', encoding='utf-8') as file:
+        contacts_list = file.read().rstrip().replace(':', '').split('\n\n')
+
+        for str_contact in contacts_list:
+            list_contact = str_contact.split()
+            # print([list_contact])
+            if search in list_contact[i_var]:
+                print(str_contact)
 
 
 
@@ -48,8 +72,9 @@ def interface():
             '1. Добавить контакт \n'
             '2. Вывести на экран \n'
             '3. Поиск контакта \n'
-            '4. Вывод '
+            '4. Выход '
             )
+        print()
         
         var = input('Выберите вариант действий: ')
         while var not in ('1', '2', '3', '4'):
@@ -66,6 +91,7 @@ def interface():
             case '4':
                 print('До cвидания')
                 exit
+        print()
 
 
 
