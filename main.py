@@ -29,7 +29,9 @@ def add_contact():
 
 def print_contact():
     with open('phonebook.txt', 'r', encoding='utf-8') as file:
-        print(''.join(['{} {}'.format(number, letter) for number, letter in enumerate(file.read().rstrip().replace(':', '').split('\n\n'), 1)]))
+        
+        for number, letter in enumerate(file.read().rstrip().replace(':', '').split('\n\n'), 1):
+            print(''.join('{} {}').format(number, letter))
         # print(file.read())
    
         
